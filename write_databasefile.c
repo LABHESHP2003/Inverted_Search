@@ -1,6 +1,6 @@
 /***************************************************************************************************************************************************
-*Author         :Emertxe(http://www.emertxe.com)
-*Date           :Mon 22 May 2017 14:20:10 IST
+*Author         :Labhesh Patil
+*Date           :Sun Sep 2025 02:07:05 IST
 *File           :write_datbasefile.c
 *Title          :Saves the details into the file
 *Description    :All the files are opened and read. Words are listed. Now this list is to be stored. 

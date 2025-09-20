@@ -1,6 +1,6 @@
 /***************************************************************************************************************************************************
-*Author         :Emertxe(http://www.emertxe.com)
-*Date           :Mon 22 May 2017 15:56:15 IST
+*Author         :Labhesh Patil
+*Date           :Sun Sep 2025 02:07:05 IST
 *File           :search.c
 *Title          :To search the words.
 *Description    :Each word is now used to search in the linkedlist. The word has to be compared with
