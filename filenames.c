@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "filename.h"
+#include "common.h"
+#include "filenames.h"
 
 // INSERT AT LAST FUNCTION
-void insert_at_last(Slist **head,char *filename){
+Status insert_at_last(Slist **head,char *filename){
     Slist *new = (Slist *)malloc(sizeof(Slist));
     if(!new){
         perror("Failed to Allocate Memory for Filename!\n");
@@ -22,15 +23,17 @@ void insert_at_last(Slist **head,char *filename){
     new->link = NULL;
 
     if(*head == NULL){       //If list is empty
-        *head = *new;
+        *head = new;
     }
     else{                  // list is not empty
         Slist *temp = *head;
-        while(*temp->link != NULL){
+        while(temp->link != NULL){
             temp = temp->link;
         }
         temp->link = new;
     }
+
+    return SUCCESS;
 }
 
 //Check for duplicate file
@@ -42,7 +45,7 @@ Status DuplicateFile(char *filename, Slist *Namelist)
     }
 
     Slist *temp = Namelist;
-    while (*temp != NULL)
+    while (temp != NULL)
     {
         if(strcmp(filename,temp->fname) == 0){
             return FAILURE;

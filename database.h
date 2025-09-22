@@ -1,11 +1,6 @@
-#if !defined(INVERTED_SEARCH_H)
-#define INVERTED_SEARCH_H
-
-// Status SUCCESS OR FAILURE
-typedef enum{
-    SUCCESS = 0,
-    FAILURE = 1
-}Status;
+#include "filenames.h"
+#if !defined(DATABASE_H)
+#define DATABASE_H
 
 //SUBNODE
 typedef struct subnode{
@@ -22,5 +17,9 @@ typedef struct mainnode{
     struct mainnode *mainlink;
 } mnode;
 
+void create_database(mnode *arr[], Slist *filename);
 
-#endif // INVERTED_SEARCH
+void display_database(mnode *arr[]);
+
+
+#endif // DATABASE

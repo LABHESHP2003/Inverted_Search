@@ -1,6 +1,7 @@
 {
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
-        "inverted_search.h": "c"
+        "inverted_search.h": "c",
+        "filenames.h": "c"
     }
 }
