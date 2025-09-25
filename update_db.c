@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include "database.h"
 #include "filenames.h"
+
 //update only one file at time 
 void update_database(mnode *arr[], Slist **filename){
     char *file = malloc(sizeof(char)*30);
@@ -16,6 +17,7 @@ void update_database(mnode *arr[], Slist **filename){
 
     char *files[] = {"a.out",file};
 
+    printf("\n");
     if(read_validate(2,files,filename) == FAILURE){
         free(file);
         return;

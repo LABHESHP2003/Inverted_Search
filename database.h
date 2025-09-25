@@ -29,11 +29,15 @@ void create_database(mnode *arr[], Slist *filename, Call mode);
 
 void display_database(mnode *arr[]);
 
-Status search_database(mnode *arr[]);
+void search_database(mnode *arr[]);
 
 void update_database(mnode *arr[], Slist **filename);
 
 void save_database(mnode *arr[]);
+
+void free_filenames(Slist *head);
+
+void free_database(mnode *arr[]);
 
 
 #endif // DATABASE

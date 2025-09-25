@@ -31,14 +31,15 @@ void save_database(mnode *arr[]){
                 snode *stemp = temp->sublink;
                 fprintf(fp,"#%d;%s;%d;",i,temp->word,temp->filecount);
                 while(stemp){
-                    fprintf(fp,"%s;%d;#",stemp->filename,stemp->wordcount);
+                    fprintf(fp,"%s;%d;",stemp->filename,stemp->wordcount);
                     stemp = stemp->slink;
                 }
+                fprintf(fp,"#\n");
                 temp = temp->mainlink;
             }
         }
     }
     fclose(fp);
-    printf("Successfully saved the database in \"%s\" file. \n",filename);
+    printf("\nSuccessfully saved the database in \"%s\" file. \n",filename);
     return;
 }

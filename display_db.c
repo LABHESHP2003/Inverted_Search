@@ -13,7 +13,8 @@
 
 void display_database(mnode *arr[])
 {
-    printf("%-6s %-20s %-10s %-20s %-10s\n", "INDEX", "WORD", "FILECOUNT", "FILENAME", "WORDCOUNT");
+    printf("----------------------------------------------------------------------\n");
+    printf("%-6s %-18s %-10s %-15s %-10s\n", "INDEX", "WORD", "FILECOUNT", "FILENAME", "WORDCOUNT");
     printf("----------------------------------------------------------------------\n");
 
     for (int i = 0; i < 27; i++) {
@@ -26,24 +27,19 @@ void display_database(mnode *arr[])
                 while (stemp) {
                     if (first_line) {
                         // Print full row with all details
-                        if(temp->filecount>1){
-                            printf("%-6d %-20s %-10d %-20s %-10d\n", i, temp->word, temp->filecount, stemp->filename, stemp->wordcount);
-                        }
-                        else{
-                            printf("%-6d %-20s %-10d %-20s %-10d\n\n", i, temp->word, temp->filecount, stemp->filename, stemp->wordcount);
-                        }
-                       
+                        printf("%-6d %-18s %-10d %-15s %-10d\n", i, temp->word, temp->filecount, stemp->filename, stemp->wordcount);
                         first_line = 0;
                     } else {
                         // Print only filename and wordcount if same word repeats in multiple files
-                        printf("%-6s %-20s %-10s %-20s %-10d\n\n", 
+                        printf("%-6s %-18s %-10s %-15s %-10d\n", 
                             "", "", "", stemp->filename, stemp->wordcount);
                     }
                     stemp = stemp->slink;
                 }
-
+                printf("\n");
                 temp = temp->mainlink;
             }
         }
     }
+    printf("----------------------------------------------------------------------\n");
 }

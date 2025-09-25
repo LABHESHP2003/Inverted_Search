@@ -107,9 +107,7 @@
 				break;
 
 			case 4:
-				int status = search_database(arr);
-				if (status == DATA_NOT_FOUND)
-				{ }
+				search_database(arr);
 				break;
 
 			case 5:
@@ -117,7 +115,29 @@
 				break;
 
 			case 6:
-				return 0;
+				char confirm;
+				int exit = 0;
+				while (!exit)
+				{
+					printf("Warning: Unsaved changes will be lost.\n");
+					printf("Do you really want to quit? (y/n): ");
+					scanf(" %c", &confirm);
+
+					if (confirm == 'y' || confirm == 'Y')
+					{
+						free_database(arr);
+                    	free_filenames(filename);
+						return 0;
+					}
+					else if (confirm == 'n' || confirm == 'N')
+					{
+						break;
+					}
+					else
+					{
+						printf("Invalid input. Please enter y or n.\n");
+					}
+				}
 
 			default:
 				printf("Invalid Input!\nEnter a valid choice\n");

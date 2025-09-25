@@ -16,7 +16,7 @@
 #include "string.h"
 #include "stdlib.h"
 
-Status search_database(mnode *arr[]){
+void search_database(mnode *arr[]){
 	char word[20];
 
 	//Read the word from user
@@ -30,7 +30,7 @@ Status search_database(mnode *arr[]){
 	}
 	else
 	{
-		index = 26; // for special chars or digits
+		index = 26; // for special chars or numbers
 	}
 
 	mnode *temp = arr[index];
@@ -45,7 +45,7 @@ Status search_database(mnode *arr[]){
 				printf("The word \"%s\" is present in %d files\n",word,temp->filecount);
 			}
 			snode *stemp = temp->sublink;
-			//print filename & wrodcount
+			//print filename & wordcount
 			while(stemp){
 				if(stemp->wordcount == 1){
 				printf("In File:\"%s\"	%d time\n",stemp->filename,stemp->wordcount);
@@ -56,10 +56,10 @@ Status search_database(mnode *arr[]){
 				stemp = stemp->slink;
 				}
 			}
-			return SUCCESS;
+			return;
 		}
 		temp = temp->mainlink;
 	}
 	printf("INFO: The word '%s' was not found in the database.\n", word);
-	return DATA_NOT_FOUND;
+	return;
 }
