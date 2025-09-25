@@ -48,8 +48,13 @@
 				// File should not repeat(Check duplicate file)
 				if (DuplicateFile(filename_argv[i], *filename) == FAILURE)
 				{
-					printf("Duplicate File found\n");
+					printf("Duplicate File: This file already exists in the database.\n");
+					if(arg_count-1>1){ //handling edge case for single file in case of update_db()
 					continue;
+					}
+					else{
+						return FAILURE;
+					}
 				}
 
 				// Store the filename to a List
@@ -89,8 +94,8 @@
 			printf("----------------------------------------------\n");
 			switch (choice)
 			{
-			case 1:
-				create_database(arr, filename);
+			case 1:	
+				create_database(arr, filename,CREATE);
 				break;
 
 			case 2:
@@ -98,15 +103,17 @@
 				break;
 
 			case 3:
-				//update_db();
+				update_database(arr, &filename);
 				break;
 
 			case 4:
-				//search();
+				int status = search_database(arr);
+				if (status == DATA_NOT_FOUND)
+				{ }
 				break;
 
 			case 5:
-				//save_db();
+				save_database(arr);
 				break;
 
 			case 6:

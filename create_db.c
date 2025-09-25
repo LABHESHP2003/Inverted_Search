@@ -16,8 +16,16 @@
 mnode *create_mainnode(char *word);
 snode *create_subnode(char *fname);
 
-void create_database(mnode *arr[], Slist *filename)
+void create_database(mnode *arr[], Slist *filename, Call mode)
 {
+	static int count = 0;
+	if(mode == CREATE){
+		if(count > 0){
+		printf("Database is already created!\n");
+		return;
+		}
+	}
+
 	char word[20];
 	while(filename){
 		//open the file
@@ -25,7 +33,15 @@ void create_database(mnode *arr[], Slist *filename)
 
 		//get the word
 		while(fscanf(fp,"%s",word) != EOF){
-			int index = tolower(word[0] % 'a');
+			int index;
+			if (isalpha(word[0]))
+			{
+				index = tolower(word[0]) - 'a'; // 'a' to 'z' -> 0 to 25
+			}
+			else
+			{
+				index = 26; // for special chars or digits
+			}
 			if(arr[index] == NULL){
 				//create a new mainnode
 				mnode *new_main = create_mainnode(word);
@@ -37,7 +53,7 @@ void create_database(mnode *arr[], Slist *filename)
 				arr[index] = new_main;
 			}
 			else{
-				mnode *temp = arr[index], *prev;
+				mnode *temp = arr[index], *prev = NULL;
 				//traverse through mainnodes
 				while(temp){
 					//compare current file word with mainnode words
@@ -59,7 +75,7 @@ void create_database(mnode *arr[], Slist *filename)
 				}
 				else{
 					//word matching
-					snode *stemp = temp->sublink,*sprev;
+					snode *stemp = temp->sublink,*sprev = NULL;
 					//traverse through subnodes
 					while(stemp){
 						if(strcmp(stemp->filename,filename->fname) == 0){
@@ -87,6 +103,14 @@ void create_database(mnode *arr[], Slist *filename)
 		}
 
 		filename = filename->link;
+	}
+	count++;
+	if (mode == CREATE)
+	{
+		printf("Database creation completed successfully.\n");
+	}
+	else if(mode == UPDATE){
+		printf("Database updated successfully.\n");
 	}
 }
 

@@ -17,9 +17,23 @@ typedef struct mainnode{
     struct mainnode *mainlink;
 } mnode;
 
-void create_database(mnode *arr[], Slist *filename);
+//Check is for function call is from create_db() or update_db()
+typedef enum{
+    CREATE = 0, //if function call for create funct
+    UPDATE = 1 // if function call for update funct
+}Call;
+
+Status read_validate(int arg_count, char *filename_argv[], Slist **filename);
+
+void create_database(mnode *arr[], Slist *filename, Call mode);
 
 void display_database(mnode *arr[]);
+
+Status search_database(mnode *arr[]);
+
+void update_database(mnode *arr[], Slist **filename);
+
+void save_database(mnode *arr[]);
 
 
 #endif // DATABASE

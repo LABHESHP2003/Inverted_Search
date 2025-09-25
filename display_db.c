@@ -11,28 +11,39 @@
 #include <stdio.h>
 #include "database.h"
 
-void display_database(mnode *arr[]){
-	printf("INDEX	WORD	FILECOUNT	FILENAME	WORDCOUNT\n");
-	for(int i = 0; i < 27; i++){
-		if(arr[i] != NULL){
-			mnode *temp = arr[i];
-			while(temp){
-				snode *stemp = temp->sublink;
-				int first_line = 1;
-				if(first_line){
-					printf("%d	%s	%d	", i, temp->word, temp->filecount);
-                    first_line = 0;
-				}
-				else{
-					printf("%d	%s	%d	\n", i, temp->word, temp->filecount);
-					printf("\n");
-				}
-				while(stemp){
-					printf("	    		%s	%d\n", stemp->filename, stemp->wordcount);
-					stemp = stemp->slink;
-				}
-				temp = temp->mainlink;
-			}
-		}
-	}
+void display_database(mnode *arr[])
+{
+    printf("%-6s %-20s %-10s %-20s %-10s\n", "INDEX", "WORD", "FILECOUNT", "FILENAME", "WORDCOUNT");
+    printf("----------------------------------------------------------------------\n");
+
+    for (int i = 0; i < 27; i++) {
+        if (arr[i] != NULL) {
+            mnode *temp = arr[i];
+            while (temp) {
+                snode *stemp = temp->sublink;
+                int first_line = 1;
+
+                while (stemp) {
+                    if (first_line) {
+                        // Print full row with all details
+                        if(temp->filecount>1){
+                            printf("%-6d %-20s %-10d %-20s %-10d\n", i, temp->word, temp->filecount, stemp->filename, stemp->wordcount);
+                        }
+                        else{
+                            printf("%-6d %-20s %-10d %-20s %-10d\n\n", i, temp->word, temp->filecount, stemp->filename, stemp->wordcount);
+                        }
+                       
+                        first_line = 0;
+                    } else {
+                        // Print only filename and wordcount if same word repeats in multiple files
+                        printf("%-6s %-20s %-10s %-20s %-10d\n\n", 
+                            "", "", "", stemp->filename, stemp->wordcount);
+                    }
+                    stemp = stemp->slink;
+                }
+
+                temp = temp->mainlink;
+            }
+        }
+    }
 }
